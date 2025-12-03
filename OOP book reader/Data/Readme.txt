@@ -1,0 +1,1 @@
+There will be serialized files (JSON, XML)
