@@ -1,4 +1,4 @@
-﻿namespace OOP_book_reader
+﻿namespace OOP_book_reader.Models
 {
     public class Book
     {

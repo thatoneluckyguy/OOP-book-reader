@@ -1,7 +1,9 @@
-﻿using OOP_book_reader;
-using static OOP_book_reader.Book;
+﻿using OOP_book_reader.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-public class BookManager 
+public class BookManager
 {
     private static List<Book> BookList = new List<Book>();
 
@@ -38,10 +40,13 @@ public class BookManager
 
         foreach (var book in BookList)
         {
-            Console.WriteLine($"Title: {book.Title} \nAuthor: {book.Author} \nDate of release: {book.DateOfRelease:yyyy-MM-dd}\n");
+            Console.WriteLine(
+                $"Title: {book.Title}\n" +
+                $"Author: {book.Author}\n" +
+                $"Date of release: {book.DateOfRelease:yyyy-MM-dd}\n"
+            );
         }
     }
-
 
     public static void SearchByName()
     {
@@ -49,7 +54,8 @@ public class BookManager
         string? searchTitle = Console.ReadLine();
 
         var foundBooks = BookList
-            .Where(b => !string.IsNullOrEmpty(b.Title) && b.Title.Contains(searchTitle ?? "", StringComparison.OrdinalIgnoreCase))
+            .Where(b => !string.IsNullOrEmpty(b.Title) &&
+                        b.Title.Contains(searchTitle ?? "", StringComparison.OrdinalIgnoreCase))
             .ToList();
 
         if (foundBooks.Count > 0)
@@ -70,27 +76,33 @@ public class BookManager
 
     public static void Serialize()
     {
-        foreach (var book in BookList)
+        if (BookList.Count == 0)
         {
-            if (book is Iserialization serializer)
-            {
-                serializer.JSONser(book, "JSON.txt");
-                serializer.XMLser(book, "XML.xml");
-            }
-            else
-            {
-                Console.WriteLine("Book does not support serialization.");
-            }
+            Console.WriteLine("No books to serialize.");
+            return;
         }
-    }
 
+        var serializer = new Serialization();
+
+        string jsonPath = "C:\\Users\\lukas_70j9se5\\source\\repos\\OOP book reader\\OOP book reader\\Data\\Books.json";
+        string xmlPath = "C:\\Users\\lukas_70j9se5\\source\\repos\\OOP book reader\\OOP book reader\\Data\\Books.xml";
+
+        serializer.JSONserList(BookList, jsonPath);
+        serializer.XMLserList(BookList, xmlPath);
+
+        Console.WriteLine("Books serialized successfully!");
+    }
 
     public static void UI()
     {
         while (true)
         {
-            Console.WriteLine("Welcome to book manager! Choose what to do:");
-            Console.WriteLine("1 -- Add book \n2 -- Show all data \n3 -- Search book by title \n4 -- Serialize 5-- exit");
+            Console.WriteLine("\nWelcome to book manager! Choose what to do:");
+            Console.WriteLine("1 -- Add book");
+            Console.WriteLine("2 -- Show all data");
+            Console.WriteLine("3 -- Search book by title");
+            Console.WriteLine("4 -- Serialize");
+            Console.WriteLine("5 -- Exit");
 
             string? input = Console.ReadLine();
 
@@ -111,15 +123,15 @@ public class BookManager
                         Serialize();
                         break;
                     case 5:
-                        return; // exit
+                        return;
                     default:
-                        Console.WriteLine("Invalid option number");
+                        Console.WriteLine("Invalid option number!");
                         break;
                 }
             }
             else
             {
-                Console.WriteLine("Invalid input");
+                Console.WriteLine("Invalid input!");
             }
         }
     }
