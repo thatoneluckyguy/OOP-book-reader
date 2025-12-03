@@ -1,6 +1,7 @@
 ﻿using OOP_book_reader;
+using static OOP_book_reader.Book;
 
-public class BookManager
+public class BookManager 
 {
     private static List<Book> BookList = new List<Book>();
 
@@ -41,6 +42,7 @@ public class BookManager
         }
     }
 
+
     public static void SearchByName()
     {
         Console.WriteLine("Enter book's title:");
@@ -66,12 +68,29 @@ public class BookManager
         }
     }
 
+    public static void Serialize()
+    {
+        foreach (var book in BookList)
+        {
+            if (book is Iserialization serializer)
+            {
+                serializer.JSONser(book, "JSON.txt");
+                serializer.XMLser(book, "XML.xml");
+            }
+            else
+            {
+                Console.WriteLine("Book does not support serialization.");
+            }
+        }
+    }
+
+
     public static void UI()
     {
         while (true)
         {
             Console.WriteLine("Welcome to book manager! Choose what to do:");
-            Console.WriteLine("1 -- Add book \n2 -- Show all data \n3 -- Search book by title \n4 -- Exit");
+            Console.WriteLine("1 -- Add book \n2 -- Show all data \n3 -- Search book by title \n4 -- Serialize 5-- exit");
 
             string? input = Console.ReadLine();
 
@@ -89,6 +108,9 @@ public class BookManager
                         SearchByName();
                         break;
                     case 4:
+                        Serialize();
+                        break;
+                    case 5:
                         return; // exit
                     default:
                         Console.WriteLine("Invalid option number");

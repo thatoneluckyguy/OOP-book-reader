@@ -19,14 +19,27 @@
             }
         }
 
-        public Book() { }
-
         //constructor - initialize the object’s properties.
         public Book(string title, string author, DateTime date)
         {
             Title = title;
             Author = author;
             DateOfRelease = date;
+        }
+
+        public Book()
+        {
+        }
+
+        public override string ToString()
+        {
+            return $"Tidfhgftle: {Title}  \n Author:{Author} \n Date of release: {DateOfRelease}";
+        }
+
+        public interface Iserialization
+        {
+            void JSONser(Book book, string Path);
+            void XMLser(Book book, string Path);
         }
     }
 }
