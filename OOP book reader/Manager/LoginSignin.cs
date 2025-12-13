@@ -23,7 +23,7 @@ namespace OOP_book_reader.Manager
 
             Directory.CreateDirectory(dataDir);
 
-            Console.WriteLine("1--sign in \n2---log in");
+            Console.WriteLine("1--signin \n2---login");
             int choise = int.Parse(Console.ReadLine());
 
             switch (choise)
