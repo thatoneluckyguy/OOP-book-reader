@@ -19,7 +19,7 @@
             }
         }
 
-        //constructor - initialize the object’s properties.
+
         public Book(string title, string author, DateTime date)
         {
             Title = title;
@@ -27,13 +27,10 @@
             DateOfRelease = date;
         }
 
-        public Book()
-        {
-        }
 
         public override string ToString()
         {
-            return $"Tidfhgftle: {Title}  \n Author:{Author} \n Date of release: {DateOfRelease}";
+            return $"Title: {Title}  \n Author:{Author} \n Date of release: {DateOfRelease}";
         }
 
         public interface Iserialization
