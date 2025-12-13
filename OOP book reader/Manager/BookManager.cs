@@ -1,4 +1,4 @@
-﻿using OOP_book_reader.Models;
+using OOP_book_reader.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,15 +82,25 @@ public class BookManager
             return;
         }
 
+
+
         var serializer = new Serialization();
 
-        string jsonPath = "C:\\Users\\lukas_70j9se5\\source\\repos\\OOP book reader\\OOP book reader\\Data\\Books.json";
-        string xmlPath = "C:\\Users\\lukas_70j9se5\\source\\repos\\OOP book reader\\OOP book reader\\Data\\Books.xml";
+
+        string basePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Data"));
+
+
+        Directory.CreateDirectory(basePath);
+
+        string jsonPath = Path.Combine(basePath, "Books.json");
+        string xmlPath = Path.Combine(basePath, "Books.xml");
+
 
         serializer.JSONserList(BookList, jsonPath);
         serializer.XMLserList(BookList, xmlPath);
 
         Console.WriteLine("Books serialized successfully!");
+
     }
 
     public static void UI()
