@@ -29,7 +29,7 @@ namespace OOP_book_reader.Models
             }
         }
 
-        // Interface methods (not used for single Book anymore)
+
         public void JSONser(Book book, string path)
         {
             string jsonString = JsonSerializer.Serialize(book, new JsonSerializerOptions { WriteIndented = true });
